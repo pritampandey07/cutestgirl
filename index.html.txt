@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>For Dhruvi 💙</title>
+
+<style>
+/* 🔹 Background gradient upgrade: soft pink + lavender + sunset */
+body {
+    margin: 0;
+    height: 100vh;
+    background: linear-gradient(135deg, #ff9ccf, #ffd7b5, #c1a7ff);
+    font-family: 'Segoe UI', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    overflow: hidden;
+    color: white;
+}
+
+/* Container */
+.container {
+    max-width: 700px;
+    padding: 20px;
+    animation: fadeIn 2s ease forwards;
+}
+
+/* Headings and text */
+h1 {
+    font-size: 3em;
+    margin-bottom: 10px;
+    text-shadow: 0 0 12px rgba(255,255,255,0.5);
+}
+
+p {
+    font-size: 1.4em;
+    line-height: 1.6;
+    opacity: 0;
+    animation: fadeInText 2s forwards;
+    animation-delay: 0.5s;
+}
+
+/* Buttons */
+.buttons {
+    position: relative;
+    height: 160px;
+    margin-top: 30px;
+}
+
+button {
+    padding: 15px 32px;
+    font-size: 1.2em;
+    border: none;
+    border-radius: 40px;
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+#yesBtn {
+    background: #ff3b7f;
+    color: white;
+}
+#yesBtn:hover {
+    transform: scale(1.2);
+    box-shadow: 0 0 20px rgba(255,59,127,0.6);
+}
+
+#noBtn {
+    background: white;
+    color: #ff3b7f;
+    position: absolute;
+}
+
+/* Floating hearts */
+.heart {
+    position: fixed;
+    bottom: -10px;
+    font-size: 22px;
+    opacity: 0.8;
+    animation: floatUp 7s linear infinite;
+}
+
+@keyframes floatUp {
+    to { transform: translateY(-120vh); opacity: 0; }
+}
+
+/* Text fade-in */
+@keyframes fadeInText {
+    to { opacity: 1; }
+}
+
+/* Gallery images */
+.gallery img {
+    width: 220px;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 20px;
+    margin: 10px;
+    opacity: 0;
+    animation: fadeIn 2s forwards;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+.gallery img:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 20px rgba(255,255,255,0.5);
+}
+
+@keyframes fadeIn { to { opacity: 1; } }
+
+/* Fireworks */
+.firework {
+    position: fixed;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    animation: explode 1s forwards;
+}
+
+@keyframes explode {
+    to { transform: scale(18); opacity: 0; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- Music -->
+<audio autoplay loop>
+    <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<div class="container" id="main">
+    <h1>Dhruvi, will you be my Valentine? 🤍</h1>
+
+    <p id="text">
+        I may not be there beside you,<br>
+        but my heart never leaves you 💙
+    </p>
+
+    <div class="buttons">
+        <button id="yesBtn" onclick="yesClicked()">Yes 🤍</button>
+        <button id="noBtn" onclick="noClicked()">No</button>
+    </div>
+</div>
+
+<script>
+let noCount = 0;
+let yesScale = 1;
+
+const noBtn = document.getElementById("noBtn");
+const yesBtn = document.getElementById("yesBtn");
+const text = document.getElementById("text");
+const main = document.getElementById("main");
+
+// Function to float "No" button randomly + jitter + rotate
+function noClicked() {
+    noCount++;
+
+    noBtn.style.left = Math.random() * (window.innerWidth - 120) + "px";
+    noBtn.style.top = Math.random() * (window.innerHeight - 60) + "px";
+    noBtn.style.transform = `rotate(${Math.random()*60-30}deg)`;
+
+    yesScale += 0.15;
+    yesBtn.style.transform = `scale(${yesScale})`;
+
+    if (noCount === 1)
+        text.innerText = "Ayee, you can't say no cause you are already 🤍";
+    else if (noCount === 2)
+        text.innerText = "How dare you say no, haww 🌙";
+    else
+        text.innerText = "Ayee, choose yes, you can't escape 💙";
+}
+
+// Yes button click
+function yesClicked() {
+    main.innerHTML = `
+        <h1>Just a second… 🌙</h1>
+        <p>Let me say this properly</p>
+    `;
+    setTimeout(finalPage, 2500);
+}
+
+// Final romantic page
+function finalPage() {
+    main.innerHTML = `
+        <h1>She said yes 🤍</h1>
+
+        <p>
+            Dhruvi,<br><br>
+            Even with miles between us,<br>
+            you are the calm in my days<br>
+            and the warmth in my nights.<br><br>
+
+            Loving you is my necessity,<br>
+            I can't stop loving you 💙<br><br>
+
+            I choose you —<br>
+            today, tomorrow,<br>
+            and every quiet moment in between 🤍<br><br>
+
+            — Always yours, <b>[Happy]</b> 💙
+        </p>
+
+        <div class="gallery">
+            <img src="photo1.jpg" style="animation-delay:0.5s">
+            <img src="photo2.jpg" style="animation-delay:1s">
+            <img src="photo3.jpg" style="animation-delay:1.5s">
+        </div>
+
+        <p style="margin-top:20px;">📸 Save this moment</p>
+    `;
+
+    setInterval(fireworks, 350);
+}
+
+// Fireworks colors randomly
+function fireworks() {
+    const f = document.createElement("div");
+    f.className = "firework";
+    f.style.left = Math.random() * 100 + "vw";
+    f.style.top = Math.random() * 100 + "vh";
+    f.style.background = `hsl(${Math.random()*360}, 100%, 60%)`;
+    document.body.appendChild(f);
+    setTimeout(() => f.remove(), 1000);
+}
+
+// Floating hearts
+setInterval(() => {
+    const h = document.createElement("div");
+    h.className = "heart";
+    h.innerHTML = "💖";
+    h.style.left = Math.random() * 100 + "vw";
+    h.style.fontSize = (18 + Math.random() * 25) + "px";
+    document.body.appendChild(h);
+    setTimeout(() => h.remove(), 7000);
+}, 400);
+</script>
+
+</body>
+</html>
